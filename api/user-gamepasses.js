@@ -2,9 +2,11 @@ import fetch from "node-fetch";
 
 export default async function handler(req, res) {
     const { userId } = req.query;
+
     if (!userId) return res.status(400).json({ error: "userId is required" });
 
     try {
+        // 1) Kullanıcının oyunlarını çek
         const gamesResp = await fetch(`https://games.roblox.com/v2/users/${userId}/games?accessFilter=Public&limit=50`, {
             headers: { 'User-Agent': 'Roblox-Proxy' }
         });
